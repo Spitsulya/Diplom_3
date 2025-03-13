@@ -16,7 +16,7 @@ public class RegistrationTest {
 
     private WebDriver driver;
     private static final String DEFAULT_BROWSER_NAME = "Chrome";
-    private static final String DEFAULT_BROWSER_YANDEX = "Yandex";
+    private static final String BROWSER_YANDEX = "Yandex";
 
     private MainPage mainPage;
     private RegisterPage registerPage;
@@ -52,18 +52,18 @@ public class RegistrationTest {
 
     @Test
     @DisplayName("Successful registration with valid password")
-    @Description("A test that verifies that a user can register by entering valid data (a password of more than six characters.")
+    @Description("A test that verifies that a user can register by entering valid data (password of more than six characters.")
     public void testRegistrationPasswordGreaterThanSixSuccessfully() {
 
         mainPage.clickAccountButton();
 
         loginPage = new LoginPage(driver);
-        loginPage.clickregisterButton();
+        loginPage.clickRegisterButton();
 
         registerPage = new RegisterPage(driver);
         registerPage.inputAllRegisterFieldsAndGo(userName, userEmail, userPassword);
 
-        assertTrue("Не появляется login страница - авторизация не успешна", registerPage.isLoginButtonDisplayed());
+        assertTrue("Не появляется login страница - авторизация не успешна", registerPage.isLoginLoginButtonDisplayed());
     }
 
     @Test
@@ -74,12 +74,12 @@ public class RegistrationTest {
         mainPage.clickAccountButton();
 
         loginPage = new LoginPage(driver);
-        loginPage.clickregisterButton();
+        loginPage.clickRegisterButton();
 
         registerPage = new RegisterPage(driver);
         registerPage.inputAllRegisterFieldsAndGo(userName, userEmail, invalidUserPassword);
 
-        assertTrue("Не отображается ошибка ввода пароля", registerPage.isLoginButtonDisplayed());
+        assertTrue("Не отображается ошибка ввода пароля", registerPage.isPasswordErrorDisplayed());
     }
 
     @After

@@ -14,6 +14,23 @@ public class BurgerServiceClient {
         this.baseURI = Url.BASE_URI;
     }
 
+    @Step("User creating, POST /api/auth/register")
+    public ValidatableResponse createUserPostRequest(String userEmail, String userPassword, String userName) {
+
+        return given()
+                .filter(new AllureRestAssured())
+                .log()
+                .all()
+                .baseUri(baseURI)
+                .header("Content-type", "application/json")
+                .body("{\"email\": \"" + userEmail + "\", \"password\": \"" + userPassword + "\", \"name\": \"" + userName + "\"}")
+                .when()
+                .post(Endpoints.CREATE_USER)
+                .then()
+                .log()
+                .all();
+    }
+
     @Step("User authorization with registration data to receive an accessToken, POST /api/auth/login")
     public ValidatableResponse loginUser(String userEmail, String userPassword, String userName) {
         return given()
