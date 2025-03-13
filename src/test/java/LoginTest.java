@@ -1,6 +1,8 @@
 import com.github.javafaker.Faker;
 import dataAPI.BurgerServiceClient;
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -19,10 +21,7 @@ public class LoginTest {
     private static final String DEFAULT_BROWSER_NAME = "Chrome";
     private static final String BROWSER_YANDEX = "Yandex";
 
-    private MainPage mainPage;
-    private RegisterPage registerPage;
     private LoginPage loginPage;
-    private ForgotPasswordPage forgotPasswordPage;
 
     private BurgerServiceClient client;
     private String userAccessToken;
@@ -52,9 +51,6 @@ public class LoginTest {
     public void setUp() {
 
         driver = WebDriverFactory.setBrowser(DEFAULT_BROWSER_NAME);
-        mainPage = new MainPage(driver);
-        registerPage = new RegisterPage(driver);
-        forgotPasswordPage = new ForgotPasswordPage(driver);
         loginPage = new LoginPage(driver);
 
         faker = new Faker();
@@ -68,6 +64,8 @@ public class LoginTest {
     }
 
     @Test
+    @DisplayName("Successful login operation using four buttons")
+    @Description("A test that verifies that a user can register and login using four login buttons and three URL pages.")
     public void testLogin() {
 
         openURL(pageUrl);

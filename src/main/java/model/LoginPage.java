@@ -31,6 +31,11 @@ public class LoginPage {
         this.driver = driver;
     }
 
+    @Step("Open Stellar Burgers login URL")
+    public  void openStellarBurgersURL() {
+        driver.get(LOGIN_PAGE_URL);
+    }
+
     public void clickRegisterButton() {
         driver.findElement(LOGIN_REGISTER_BUTTON).click();
     }
@@ -55,6 +60,7 @@ public class LoginPage {
         clickLoginButton();
     }
 
+    @Step("Checking successfull user login")
     public boolean isTitleDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
