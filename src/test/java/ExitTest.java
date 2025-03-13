@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 
-public class ConstructorTest {
+public class ExitTest {
 
     private WebDriver driver;
     private static final String DEFAULT_BROWSER_NAME = "Chrome";
@@ -18,6 +18,7 @@ public class ConstructorTest {
 
     private MainPage mainPage;
     private LoginPage loginPage;
+    private PersonalAccount personalAccount;
 
     private BurgerServiceClient client;
     private String userAccessToken;
@@ -33,6 +34,7 @@ public class ConstructorTest {
         driver = WebDriverFactory.setBrowser(DEFAULT_BROWSER_NAME);
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
+        personalAccount = new PersonalAccount(driver);
 
         faker = new Faker();
         userEmail = faker.internet().emailAddress();
@@ -49,24 +51,15 @@ public class ConstructorTest {
     }
 
     @Test
-    @DisplayName("Successful transition to Constructor page from Personal Account")
-    @Description("A test that verifies that a user can register, login and go to Constructor page from Personal account using Constructor button.")
+    @DisplayName("Successful logout from Personal Account")
+    @Description("A test that verifies that a user can register, login, go to Personal account and logout.")
     public void testConstructorButtonTransition() {
 
-        mainPage.clickConstructorButton();
+        personalAccount.clickExitButton();
 
-        assertTrue("Переход в Личный Кабинет не осуществлен", mainPage.isTitleDisplayed());
+        assertTrue("Не удалось выйти из аккаунта", loginPage.isEntranceDisplayed());
     }
 
-    @Test
-    @DisplayName("Successful transition to Constructor page from Personal Account")
-    @Description("A test that verifies that a user can register, login and go to Constructor page from Personal account using LOGO.")
-    public void testConstructorLogoTransition() {
-
-        mainPage.clickLogoButton();
-
-        assertTrue("Переход в Личный Кабинет не осуществлен", mainPage.isTitleDisplayed());
-    }
 
     @After
     public void tearDown() {

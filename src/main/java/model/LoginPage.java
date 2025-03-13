@@ -26,6 +26,8 @@ public class LoginPage {
     private static final By LOGIN_RECOVER_PASSWORD_BUTTON = By.xpath(".//*[text()='Восстановить пароль']");
     // Заголовок Соберите бургер
     private static final By LOGIN_TITTLE_CREATE_BURGER = By.xpath(".//*[text()='Соберите бургер']");
+    // Заголовок Вход
+    private static final By LOGIN_TITTLE = By.xpath(".//div[@class='AppHeader_header__logo__2D0X2']");
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
@@ -65,6 +67,17 @@ public class LoginPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
             WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(getMainTittleCreateBurgerLocator()));
+            return button.isDisplayed();
+        } catch (Exception e) {
+            return false; // Если заголовок не появился, возвращаем false
+        }
+    }
+
+    @Step("Checking successfully exiting form account")
+    public boolean isEntranceDisplayed() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_TITTLE));
             return button.isDisplayed();
         } catch (Exception e) {
             return false; // Если заголовок не появился, возвращаем false

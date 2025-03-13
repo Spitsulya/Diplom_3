@@ -23,6 +23,9 @@ public class MainPage {
     private static final By MAIN_TITTLE_CREATE_BURGER = By.xpath(".//*[text()='Соберите бургер']");
     // Конструктор
     private static final By MAIN_CONSTRUCTOR_BUTTON = By.xpath(".//*[text()='Конструктор']");
+    // Логотип
+    private static final By LOGO_BUTTON = By.xpath(".//div[@class='AppHeader_header__logo__2D0X2']");
+
 
 
     public MainPage(WebDriver driver) {
@@ -39,13 +42,18 @@ public class MainPage {
         driver.findElement(MAIN_ACCOUNT_BUTTON).click();
     }
 
-    @Step("Click on the Login button on the main form")
+    @Step("Click on the Login button")
     public void clickLoginButton() {
-        driver.findElement(MAIN_LOGIN_BUTTON).click();
+        driver.findElement(LOGO_BUTTON).click();
     }
 
     @Step("Click on the Constructor on the main form")
     public void clickConstructorButton() {
+        driver.findElement(MAIN_CONSTRUCTOR_BUTTON).click();
+    }
+
+    @Step("Click on the LOGO on the main form")
+    public void clickLogoButton() {
         driver.findElement(MAIN_CONSTRUCTOR_BUTTON).click();
     }
 
