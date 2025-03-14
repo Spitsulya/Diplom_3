@@ -24,8 +24,8 @@ public class RegisterPage {
     private static final By REGISTER_REGISTER_BUTTON = By.xpath(".//button[text()='Зарегистрироваться']");
     // Кнопка Войти
     private static final By REGISTER_LOGIN_BUTTON = By.xpath(".//*[text()='Войти']");
-    // Ошибка пароля
-    private static final By REGISTER_PASSWORD_ERROR = By.xpath(".//*[text()='Пароль']");
+    // Ошибка ввода пароля
+    private static final By REGISTER_PASSWORD_ERROR = By.xpath(".//*[text()='Некорректный пароль']");
 
     public RegisterPage(WebDriver driver) {
         this.driver = driver;

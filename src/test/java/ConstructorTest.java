@@ -55,7 +55,7 @@ public class ConstructorTest {
 
         mainPage.clickConstructorButton();
 
-        assertTrue("Переход в Личный Кабинет не осуществлен", mainPage.isTitleDisplayed());
+        assertTrue("The transfer to the Personal Account has not been completed", mainPage.isTitleDisplayed());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class ConstructorTest {
 
         mainPage.clickLogoButton();
 
-        assertTrue("Переход в Личный Кабинет не осуществлен", mainPage.isTitleDisplayed());
+        assertTrue("The transfer to the Personal Account has not been completed", mainPage.isTitleDisplayed());
     }
 
     @After

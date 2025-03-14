@@ -52,12 +52,12 @@ public class ExitTest {
 
     @Test
     @DisplayName("Successful logout from Personal Account")
-    @Description("A test that verifies that a user can register, login, go to Personal account and logout.")
-    public void testConstructorButtonTransition() {
+    @Description("A test that verifies that a user can register, login, go to Personal account and logout using Exit button.")
+    public void testLogoutProcess() {
 
         personalAccount.clickExitButton();
 
-        assertTrue("Не удалось выйти из аккаунта", loginPage.isEntranceDisplayed());
+        assertTrue("Couldn't log out of account.", loginPage.isEntranceDisplayed());
     }
 
 

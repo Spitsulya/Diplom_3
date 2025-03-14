@@ -63,7 +63,7 @@ public class RegistrationTest {
         registerPage = new RegisterPage(driver);
         registerPage.inputAllRegisterFieldsAndGo(userName, userEmail, userPassword);
 
-        assertTrue("Не появляется login страница - авторизация не успешна", registerPage.isLoginLoginButtonDisplayed());
+        assertTrue("The login page does not appear - authorization is not successful.", registerPage.isLoginLoginButtonDisplayed());
     }
 
     @Test
@@ -79,7 +79,7 @@ public class RegistrationTest {
         registerPage = new RegisterPage(driver);
         registerPage.inputAllRegisterFieldsAndGo(userName, userEmail, invalidUserPassword);
 
-        assertTrue("Не отображается ошибка ввода пароля", registerPage.isPasswordErrorDisplayed());
+        assertTrue("The password entry error is not displayed when entering less than six characters.", registerPage.isPasswordErrorDisplayed());
     }
 
     @After

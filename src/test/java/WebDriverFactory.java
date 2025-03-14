@@ -18,7 +18,7 @@ public class WebDriverFactory {
         } else if (browserName.equals(YANDEX_BROWSER)) {
             return new ChromeDriver(options);
         } else {
-            throw new RuntimeException("Не удалось определить браузер.");
+            throw new RuntimeException("The browser could not be detected.");
         }
     }
 }

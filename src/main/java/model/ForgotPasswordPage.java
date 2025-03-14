@@ -15,7 +15,6 @@ public class ForgotPasswordPage {
         this.driver = driver;
     }
 
-    // ГЕТТЕРЫ
     public static String getForgotPasswordPageUrl() {
         return FORGOT_PASSWORD_PAGE_URL;
     }

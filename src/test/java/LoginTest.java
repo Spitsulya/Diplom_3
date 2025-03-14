@@ -66,13 +66,13 @@ public class LoginTest {
     @Test
     @DisplayName("Successful login operation using four buttons")
     @Description("A test that verifies that a user can register and login using four login buttons and three URL pages.")
-    public void testLogin() {
+    public void testUserLoginUsingFourButtons() {
 
         openURL(pageUrl);
         clickButton(buttonLocator);
         loginPage.inputAllRegisterFieldsAndGo(userEmail, userPassword);
 
-        assertTrue("Вход не был успешным", loginPage.isTitleDisplayed());
+        assertTrue("The login was not successful.", loginPage.isTitleDisplayed());
     }
 
     @After

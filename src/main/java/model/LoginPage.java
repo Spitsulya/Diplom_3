@@ -12,13 +12,13 @@ public class LoginPage {
 
     private WebDriver driver;
 
-    // URL логин страницы
+    // URL страницы Логин
     private static final String LOGIN_PAGE_URL = "https://stellarburgers.nomoreparties.site/login";
-    // Ввод email
+    // Ввод Email
     private static final By LOGIN_INPUT_EMAIL = By.xpath(".//fieldset[1]//input[@name='name']");
     // Ввод Пароль
     private static final By LOGIN_INPUT_PASSWORD = By.xpath(".//fieldset[2]//input[@name='Пароль']");
-    //Кнопка Войти
+    // Кнопка Войти
     private static final By LOGIN_LOGIN_BUTTON = By.xpath(".//button[text()='Войти']");
     // Кнопка Зарегистрироваться
     private static final By LOGIN_REGISTER_BUTTON = By.xpath(".//*[text()='Зарегистрироваться']");
@@ -84,7 +84,6 @@ public class LoginPage {
         }
     }
 
-    // ГЕТТЕРЫ
     public static By getLoginLoginButtonLocator() {
         return LOGIN_LOGIN_BUTTON;
     }
