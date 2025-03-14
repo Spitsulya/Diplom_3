@@ -9,7 +9,7 @@ public class ForgotPasswordPage {
     // URL страницы восстановления пароля
     private static final String FORGOT_PASSWORD_PAGE_URL = "https://stellarburgers.nomoreparties.site/forgot-password";
     // Кнопка Войти
-    private static final By FP_LOGIN_BUTTON = By.xpath(".//button[text()='Войти в аккаунт']");
+    private static final By FP_LOGIN_BUTTON = By.xpath(".//*[text()='Войти']");
 
     public ForgotPasswordPage(WebDriver driver) {
         this.driver = driver;

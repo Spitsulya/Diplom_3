@@ -34,8 +34,8 @@ public class ConstructorSectionsTest {
     @Description("A test that allows to check the correct moving between tabs.")
     public void testConstructorSectionBunTransition() {
 
-        // Перейти на соседнюю вкладу Соусы для старта
-        mainPage.clickConstructorSouse();
+        // Перейти на соседнюю вкладу Начинки для старта
+        mainPage.clickLConstructorFilling();
         // Получаем начальные координаты заголовка списка с булками
         Rectangle firstRect = mainPage.getConstructorBunHeaderWebElement().getRect();
         int startCoordinateY = firstRect.getY();

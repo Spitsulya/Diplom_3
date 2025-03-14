@@ -44,7 +44,6 @@ public class MainPage {
     }
 
 
-
     @Step("Open Stellar Burgers main URL")
     public  void openStellarBurgersURL() {
         driver.get(PAGE_URL);
@@ -142,6 +141,5 @@ public class MainPage {
     public static By getConstructorFillingHeaderLocator() {
         return CONSTRUCTOR_FILLING_HEADER;
     }
-
 
 }
