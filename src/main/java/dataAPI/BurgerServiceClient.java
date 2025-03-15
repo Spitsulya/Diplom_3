@@ -5,17 +5,24 @@ import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.ValidatableResponse;
 import static io.restassured.RestAssured.given;
+import static org.apache.http.HttpStatus.*;
+import com.google.gson.Gson;
+
 
 public class BurgerServiceClient {
 
     private String baseURI;
+    private Gson gson;
 
     public BurgerServiceClient() {
         this.baseURI = Url.BASE_URI;
+        this.gson = new Gson();
     }
 
     @Step("User creating, POST /api/auth/register")
     public ValidatableResponse createUserPostRequest(String userEmail, String userPassword, String userName) {
+
+        String jsonBody = createUserJson(userEmail, userPassword, userName);
 
         return given()
                 .filter(new AllureRestAssured())
@@ -23,7 +30,7 @@ public class BurgerServiceClient {
                 .all()
                 .baseUri(baseURI)
                 .header("Content-type", "application/json")
-                .body("{\"email\": \"" + userEmail + "\", \"password\": \"" + userPassword + "\", \"name\": \"" + userName + "\"}")
+                .body(jsonBody)
                 .when()
                 .post(Endpoints.CREATE_USER)
                 .then()
@@ -33,17 +40,21 @@ public class BurgerServiceClient {
 
     @Step("User authorization with registration data to receive an accessToken, POST /api/auth/login")
     public ValidatableResponse loginUser(String userEmail, String userPassword, String userName) {
+
+        String jsonBody = createUserJson(userEmail, userPassword, userName);
+
         return given()
                 .filter(new AllureRestAssured())
                 .log()
                 .all()
                 .baseUri(baseURI)
                 .header("Content-type", "application/json")
-                .body("{\"email\": \"" + userEmail + "\", \"password\": \"" + userPassword + "\", \"name\": \"" + userName + "\"}")
+                .body(jsonBody)
                 .post(Endpoints.LOGIN_USER)
                 .then()
                 .log()
-                .all();
+                .all()
+                .statusCode(SC_OK);
     }
 
     @Step("User removing with accessToken and completing the test, DELETE /api/auth/user")
@@ -61,9 +72,12 @@ public class BurgerServiceClient {
                 .then()
                 .log()
                 .all()
-                .statusCode(202);
+                .statusCode(SC_ACCEPTED);
     }
 
-
+    private String createUserJson(String userEmail, String userPassword, String userName) {
+        ClientData clientData = new ClientData(userEmail, userPassword, userName); // Создание объекта пользователя
+        return gson.toJson(clientData); // Сериализация объекта в JSON
+    }
 
 }
