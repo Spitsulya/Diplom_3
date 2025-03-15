@@ -1,5 +1,5 @@
 import com.github.javafaker.Faker;
-import dataAPI.BurgerServiceClient;
+import client.BurgerServiceClient;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
@@ -13,8 +13,6 @@ import static org.junit.Assert.assertTrue;
 public class ConstructorTest {
 
     private WebDriver driver;
-    private static final String DEFAULT_BROWSER_NAME = "Chrome";
-    private static final String BROWSER_YANDEX = "Yandex";
 
     private MainPage mainPage;
     private LoginPage loginPage;
@@ -30,7 +28,8 @@ public class ConstructorTest {
     @Before
     public void setUp() {
 
-        driver = WebDriverFactory.setBrowser(DEFAULT_BROWSER_NAME);
+        driver = WebDriverFactory.getDefaultDriver();
+
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
 

@@ -1,4 +1,5 @@
 package model;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -15,10 +16,12 @@ public class ForgotPasswordPage {
         this.driver = driver;
     }
 
+    @Step("Getting 'forgot-password' page URL")
     public static String getForgotPasswordPageUrl() {
         return FORGOT_PASSWORD_PAGE_URL;
     }
 
+    @Step("Getting login button locator on the 'forgot-password' page")
     public static By getFPLoginButtonLocator() {
         return FP_LOGIN_BUTTON;
     }

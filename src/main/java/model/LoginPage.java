@@ -84,6 +84,7 @@ public class LoginPage {
         }
     }
 
+    @Step("Getting login button locator on the 'login' page")
     public static By getLoginLoginButtonLocator() {
         return LOGIN_LOGIN_BUTTON;
     }

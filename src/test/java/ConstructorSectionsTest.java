@@ -1,27 +1,23 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import model.*;
-import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriver;
 import org.junit.Test;
-import static org.junit.Assert.assertTrue;
 
 
 public class ConstructorSectionsTest {
 
     private WebDriver driver;
-    private static final String DEFAULT_BROWSER_NAME = "Chrome";
-    private static final String BROWSER_YANDEX = "Yandex";
-
     private MainPage mainPage;
 
 
     @Before
     public void setUp() {
 
-        driver = WebDriverFactory.setBrowser(DEFAULT_BROWSER_NAME);
+        driver = WebDriverFactory.getDefaultDriver();
         driver.manage().window().maximize();
 
         mainPage = new MainPage(driver);
@@ -31,70 +27,33 @@ public class ConstructorSectionsTest {
 
     @Test
     @DisplayName("Successful transition to Constructor sections {bun}")
-    @Description("A test that allows to check the correct moving between tabs.")
-    public void testConstructorSectionBunTransition() {
+    @Description("A test that allows to check the correct moving between tabs: from 'Filling' to 'Bun'.")
+    public void testBunTabActivation() {
 
-        // Перейти на соседнюю вкладу Начинки для старта
-        mainPage.clickLConstructorFilling();
-        // Получаем начальные координаты заголовка списка с булками
-        Rectangle firstRect = mainPage.getConstructorBunHeaderWebElement().getRect();
-        int startCoordinateY = firstRect.getY();
-        System.out.println("Y coordinate: " + startCoordinateY);
+        mainPage.clickFillingTab();
+        mainPage.clickBunTab();
+        Assert.assertTrue("The tab 'Bun' should be active.", mainPage.isBunTabActive());
 
-        // Кликаем по вкладке Булки
-        mainPage.clickConstructorBun();
-
-        // Получаем новые координаты заголовка списка с булками
-        Rectangle secondRect = mainPage.getConstructorBunHeaderWebElement().getRect();
-        int newCoordinateY = secondRect.getY();
-        System.out.println("Y coordinate: " + newCoordinateY);
-
-        // Проверяем, что произошло смещение элемента вверх
-        assertTrue("The tittle of the Buns has not moved up.", newCoordinateY < startCoordinateY);
     }
 
     @Test
     @DisplayName("Successful transition to Constructor sections {souse}")
-    @Description("A test that allows to check the correct moving between tabs.")
-    public void testConstructorSectionSouseTransition() {
+    @Description("A test that allows to check the correct moving between tabs: from 'Bun' to 'Souse'.")
+    public void testSauceTabActivation() {
 
-        // Получаем начальные координаты заголовка списка с соусами
-        Rectangle firstRect = driver.findElement(MainPage.getConstructorSouseHeaderLocator()).getRect();
-        int startCoordinateY = firstRect.getY();
-        System.out.println("Y coordinate: " + startCoordinateY);
-
-        // Кликаем по вкладке соусов
-        mainPage.clickConstructorSouse();
-
-        // Получаем новые координаты заголовка списка с соусами
-        Rectangle secondRect = driver.findElement(MainPage.getConstructorSouseHeaderLocator()).getRect();
-        int newCoordinateY = secondRect.getY();
-        System.out.println("Y coordinate: " + newCoordinateY);
-
-        // Проверяем, что произошло смещение элемента вверх
-        assertTrue("The tittle of the Souses has not moved up.", newCoordinateY < startCoordinateY);
+        Assert.assertFalse("The tab 'Souse' is mistakenly active.", mainPage.isSauceTabActive());
+        mainPage.clickSouseTab();
+        Assert.assertTrue("The tab 'Souse' should be active.", mainPage.isSauceTabActive());
     }
 
     @Test
     @DisplayName("Successful transition to Constructor sections {filling}")
-    @Description("A test that allows to check the correct moving between tabs.")
-    public void testConstructorSectionFillingTransition() {
+    @Description("A test that allows to check the correct moving between tabs: from 'Bun' to 'Filling'.")
+    public void testFillingTabActivation() {
 
-        // Получаем начальные координаты заголовка списка с соусами
-        Rectangle firstRect = driver.findElement(MainPage.getConstructorFillingHeaderLocator()).getRect();
-        int startCoordinateY = firstRect.getY();
-        System.out.println("Y coordinate: " + startCoordinateY);
-
-        // Кликаем по вкладке соусов
-        mainPage.clickLConstructorFilling();
-
-        // Получаем новые координаты заголовка списка с соусами
-        Rectangle secondRect = driver.findElement(MainPage.getConstructorFillingHeaderLocator()).getRect();
-        int newCoordinateY = secondRect.getY();
-        System.out.println("New Y coordinate: " + newCoordinateY);
-
-        // Проверяем, что произошло смещение элемента вверх
-        assertTrue("The tittle of the Fillings has not moved up.", newCoordinateY < startCoordinateY);
+        Assert.assertFalse("The tab 'Filling' is mistakenly active.", mainPage.isFillingTabActive());
+        mainPage.clickFillingTab();
+        Assert.assertTrue("The tab 'Filling' should be active.", mainPage.isFillingTabActive());
     }
 
     @After
@@ -102,3 +61,5 @@ public class ConstructorSectionsTest {
         driver.quit();
     }
 }
+
+

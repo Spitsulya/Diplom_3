@@ -1,5 +1,5 @@
 import com.github.javafaker.Faker;
-import dataAPI.BurgerServiceClient;
+import client.BurgerServiceClient;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
@@ -18,8 +18,6 @@ import static org.junit.Assert.assertTrue;
 public class LoginTest {
 
     private WebDriver driver;
-    private static final String DEFAULT_BROWSER_NAME = "Chrome";
-    private static final String BROWSER_YANDEX = "Yandex";
 
     private LoginPage loginPage;
 
@@ -50,7 +48,8 @@ public class LoginTest {
     @Before
     public void setUp() {
 
-        driver = WebDriverFactory.setBrowser(DEFAULT_BROWSER_NAME);
+        driver = WebDriverFactory.getDefaultDriver();
+
         loginPage = new LoginPage(driver);
 
         faker = new Faker();

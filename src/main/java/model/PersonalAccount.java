@@ -13,7 +13,7 @@ public class PersonalAccount {
     private WebDriver driver;
 
     // Кнопка Выход
-    private static final By PA_EXIT_BUTTON = By.xpath(".//button[text()='Выход']");
+    private static final By PA_EXIT_BUTTON = By.xpath(".//ul//button[text()='Выход']");
 
     public PersonalAccount(WebDriver driver) {
         this.driver = driver;

@@ -1,6 +1,6 @@
-package dataAPI;
-import dataAPI.Constants.Endpoints;
-import dataAPI.Constants.Url;
+package client;
+import client.constants.Endpoints;
+import client.constants.Url;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.ValidatableResponse;

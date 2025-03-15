@@ -8,15 +8,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import dataAPI.BurgerServiceClient;
+import client.BurgerServiceClient;
 import static org.junit.Assert.assertTrue;
 
 
 public class RegistrationTest {
 
     private WebDriver driver;
-    private static final String DEFAULT_BROWSER_NAME = "Chrome";
-    private static final String BROWSER_YANDEX = "Yandex";
 
     private MainPage mainPage;
     private RegisterPage registerPage;
@@ -36,7 +34,7 @@ public class RegistrationTest {
     @Before
     public void setUp() {
 
-        driver = WebDriverFactory.setBrowser(DEFAULT_BROWSER_NAME);
+        driver = WebDriverFactory.getDefaultDriver();
 
         mainPage = new MainPage(driver);
         mainPage.openStellarBurgersURL();

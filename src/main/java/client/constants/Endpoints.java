@@ -1,4 +1,4 @@
-package dataAPI.Constants;
+package client.constants;
 
 public class Endpoints {
     public static final String CREATE_USER = "/api/auth/register";

@@ -1,4 +1,4 @@
-package dataAPI;
+package client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

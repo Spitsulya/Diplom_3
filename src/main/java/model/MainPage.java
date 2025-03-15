@@ -24,23 +24,24 @@ public class MainPage {
     private static final By MAIN_CONSTRUCTOR_BUTTON = By.xpath(".//*[text()='Конструктор']");
     // Логотип
     private static final By LOGO_BUTTON = By.xpath(".//div[@class='AppHeader_header__logo__2D0X2']");
-    // Раздел Булки
-    private static final By CONSTRUCTOR_BUN = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Булки')]");
-    // Раздел Соусы
-    private static final By CONSTRUCTOR_SOUSE = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Соусы')]");
-    // Раздел Начинки
-    private static final By CONSTRUCTOR_FILLING = By.xpath(".//section[@class='BurgerIngredients_ingredients__1N8v2']//span[contains(text(), 'Начинки')]");
-    // Заголовок раздела Булки
-    private static final By CONSTRUCTOR_BUN_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Булки')]");
-    // Заголовок раздела Соусы
-    private static final By CONSTRUCTOR_SOUSE_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Соусы')]");
-    // Заголовок раздела Начинки
-    private static final By CONSTRUCTOR_FILLING_HEADER = By.xpath(".//h2[contains(@class, 'text_type_main-medium') and contains (text(), 'Начинки')]");
+    // Раздел Булки активный
+    private static final By CONSTRUCTOR_BUN_ACTIVE_TAB = By.xpath("//div[contains(@class, 'tab_tab_type_current__2BEPc') and .//span[text()='Булки']]");
+    // Раздел Булки не активный
+    private static final By CONSTRUCTOR_BUN_INACTIVE_TAB = By.xpath("//div[contains(@class, 'tab_tab__1SPyG') and not(contains(@class, 'tab_tab_type_current__2BEPc'))]//span[text()='Булки']");
+    // Раздел Соусы активный
+    private static final By CONSTRUCTOR_SOUSE_ACTIVE_TAB = By.xpath("//div[contains(@class, 'tab_tab_type_current__2BEPc') and .//span[text()='Соусы']]");
+    // Раздел Соусы не активный
+    private static final By CONSTRUCTOR_SOUSE_INACTIVE_TAB = By.xpath("//div[contains(@class, 'tab_tab__1SPyG') and not(contains(@class, 'tab_tab_type_current__2BEPc'))]//span[text()='Соусы']");   // Раздел Булки не активный
+    // Раздел Начинки активный
+    private static final By CONSTRUCTOR_FILLING_ACTIVE_TAB = By.xpath("//div[contains(@class, 'tab_tab_type_current__2BEPc') and .//span[text()='Начинки']]");
+    // Раздел Начинки не активный
+    private static final By CONSTRUCTOR_FILLING_INACTIVE_TAB = By.xpath("//div[contains(@class, 'tab_tab__1SPyG') and not(contains(@class, 'tab_tab_type_current__2BEPc'))]//span[text()='Начинки']");
 
 
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
     }
 
 
@@ -62,7 +63,7 @@ public class MainPage {
     @Step("Click on the Constructor on the main form")
     public void clickConstructorButton() {
         driver.findElement(MAIN_CONSTRUCTOR_BUTTON).click();
-        waitForElementToBeVisible(CONSTRUCTOR_BUN_HEADER);
+        waitForElementToBeVisible(CONSTRUCTOR_BUN_ACTIVE_TAB);
     }
 
     @Step("Click on the LOGO on the main form")
@@ -71,31 +72,31 @@ public class MainPage {
     }
 
     @Step("Click on the BUN on the Constructor form")
-    public void clickConstructorBun() {
-        driver.findElement(CONSTRUCTOR_BUN).click();
-        waitForElementToBeVisible(CONSTRUCTOR_BUN_HEADER);
+    public void clickBunTab() {
+        driver.findElement(CONSTRUCTOR_BUN_INACTIVE_TAB).click();
+//        waitForElementToBeVisible(CONSTRUCTOR_BUN_ACTIVE_TAB);
     }
     @Step("Click on the SOUSE on the Constructor form")
-    public void clickConstructorSouse() {
-        driver.findElement(CONSTRUCTOR_SOUSE).click();
-        waitForElementToBeVisible(CONSTRUCTOR_SOUSE_HEADER);
+    public void clickSouseTab() {
+        driver.findElement(CONSTRUCTOR_SOUSE_INACTIVE_TAB).click();
+//        waitForElementToBeVisible(CONSTRUCTOR_SOUSE_ACTIVE_TAB);
     }
     @Step("Click on the FILLING on the Constructor form")
-    public void clickLConstructorFilling() {
-        driver.findElement(CONSTRUCTOR_FILLING).click();
-        waitForElementToBeVisible(CONSTRUCTOR_FILLING_HEADER);
+    public void clickFillingTab() {
+        driver.findElement(CONSTRUCTOR_FILLING_INACTIVE_TAB).click();
+//        waitForElementToBeVisible(CONSTRUCTOR_FILLING_ACTIVE_TAB);
     }
 
     public void waitForElementToBeVisible(By locator) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     @Step("Checking successfully transition to the Constructor")
     public boolean isTitleDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
-            WebElement button = wait.until(ExpectedConditions.visibilityOfElementLocated(getMainTittleCreateBurgerLocator()));
+            WebElement button = wait.until(ExpectedConditions.elementToBeClickable(getMainTittleCreateBurgerLocator()));
             return button.isDisplayed();
         } catch (Exception e) {
             return false; // Если заголовок не появился, возвращаем false
@@ -118,28 +119,22 @@ public class MainPage {
         return MAIN_TITTLE_CREATE_BURGER;
     }
 
-    public static By getConstructorBunLocator() {
-        return CONSTRUCTOR_BUN;
+    @Step("Checking successful move to 'Bun' tab")
+    public boolean isBunTabActive() {
+        return driver.findElements(CONSTRUCTOR_BUN_ACTIVE_TAB).size() > 0;
     }
 
-    public static By getConstructorSouseLocator() {
-        return CONSTRUCTOR_SOUSE;
+    @Step("Checking successful move to 'Souse' tab")
+    public boolean isSauceTabActive() {
+        return driver.findElements(CONSTRUCTOR_SOUSE_ACTIVE_TAB).size() > 0;
     }
 
-    public static By getConstructorFillingLocator() {
-        return CONSTRUCTOR_FILLING;
+    @Step("Checking successful move to 'Filling' tab")
+    public boolean isFillingTabActive() {
+        return driver.findElements(CONSTRUCTOR_FILLING_ACTIVE_TAB).size() > 0;
     }
 
-    public WebElement getConstructorBunHeaderWebElement() {
-        return driver.findElement(CONSTRUCTOR_BUN_HEADER);
-    }
 
-    public static By getConstructorSouseHeaderLocator() {
-        return CONSTRUCTOR_SOUSE_HEADER;
-    }
 
-    public static By getConstructorFillingHeaderLocator() {
-        return CONSTRUCTOR_FILLING_HEADER;
-    }
 
 }
