@@ -21,13 +21,13 @@ public class ConstructorSectionsTest {
         driver.manage().window().maximize();
 
         mainPage = new MainPage(driver);
-        mainPage.openStellarBurgersURL();
+        mainPage.openStellarBurgersMainURL();
 
     }
 
     @Test
-    @DisplayName("Successful transition to Constructor sections {bun}")
-    @Description("A test that allows to check the correct moving between tabs: from 'Filling' to 'Bun'.")
+    @DisplayName("Successful transition to 'constructor' page sections {bun}")
+    @Description("A test that allows to check the correct moving between tabs: from 'filling' to 'bun'.")
     public void testBunTabActivation() {
 
         mainPage.clickFillingTab();
@@ -37,8 +37,8 @@ public class ConstructorSectionsTest {
     }
 
     @Test
-    @DisplayName("Successful transition to Constructor sections {souse}")
-    @Description("A test that allows to check the correct moving between tabs: from 'Bun' to 'Souse'.")
+    @DisplayName("Successful transition to 'constructor' page sections {souse}")
+    @Description("A test that allows to check the correct moving between tabs: from 'bun' to 'souse'.")
     public void testSauceTabActivation() {
 
         Assert.assertFalse("The tab 'Souse' is mistakenly active.", mainPage.isSauceTabActive());
@@ -47,8 +47,8 @@ public class ConstructorSectionsTest {
     }
 
     @Test
-    @DisplayName("Successful transition to Constructor sections {filling}")
-    @Description("A test that allows to check the correct moving between tabs: from 'Bun' to 'Filling'.")
+    @DisplayName("Successful transition to 'constructor' page sections {filling}")
+    @Description("A test that allows to check the correct moving between tabs: from 'bun' to 'filling'.")
     public void testFillingTabActivation() {
 
         Assert.assertFalse("The tab 'Filling' is mistakenly active.", mainPage.isFillingTabActive());

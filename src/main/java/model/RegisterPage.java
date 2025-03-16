@@ -31,6 +31,11 @@ public class RegisterPage {
         this.driver = driver;
     }
 
+    @Step("Open Stellar Burgers 'register' page URL")
+    public void openStellarBurgersRegisterURL() {
+        driver.get(REGISTER_PAGE_URL);
+    }
+
     public void setName(String userName) {
         driver.findElement(REGISTER_INPUT_NAME).sendKeys(userName);
     }
@@ -43,11 +48,12 @@ public class RegisterPage {
         driver.findElement(REGISTER_INPUT_PASSWORD).sendKeys(userPassword);
     }
 
-    @Step("Click on the Register button on the RegisterPage form")
+    @Step("Click on the 'register' button on the 'register' page form")
     public void clickRegisterButton() {
         driver.findElement(REGISTER_REGISTER_BUTTON).click();
     }
 
+    @Step("Click on the 'login' button on the 'register' page")
     public void clickLoginButton() {
         driver.findElement(REGISTER_LOGIN_BUTTON).click();
     }
@@ -57,6 +63,7 @@ public class RegisterPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    @Step("Checking successfully transition to 'login' page from 'authorization'")
     public boolean isLoginLoginButtonDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {
@@ -67,6 +74,7 @@ public class RegisterPage {
         }
     }
 
+    @Step("Checking successful password error displaying")
     public boolean isPasswordErrorDisplayed() {
         return driver.findElement(REGISTER_PASSWORD_ERROR).isDisplayed();
     }
@@ -79,13 +87,4 @@ public class RegisterPage {
         setPassword(userPassword);
         clickRegisterButton();
     }
-
-    public static String getRegisterPageUrl() {
-        return REGISTER_PAGE_URL;
-    }
-
-    public static By getRegisterLoginButtonLocator() {
-        return REGISTER_LOGIN_BUTTON;
-    }
-
 }

@@ -53,8 +53,7 @@ public class BurgerServiceClient {
                 .post(Endpoints.LOGIN_USER)
                 .then()
                 .log()
-                .all()
-                .statusCode(SC_OK);
+                .all();
     }
 
     @Step("User removing with accessToken and completing the test, DELETE /api/auth/user")

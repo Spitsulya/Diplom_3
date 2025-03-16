@@ -41,15 +41,15 @@ public class ConstructorTest {
         client = new BurgerServiceClient();
         userAccessToken = client.createUserPostRequest(userEmail, userPassword, userName).extract().path("accessToken");
 
-        loginPage.openStellarBurgersURL();
+        loginPage.openStellarBurgersLoginURL();
         loginPage.inputAllRegisterFieldsAndGo(userEmail, userPassword);
         mainPage.clickAccountButton();
 
     }
 
     @Test
-    @DisplayName("Successful transition to Constructor page from Personal Account")
-    @Description("A test that verifies that a user can register, login and go to Constructor page from Personal account using Constructor button.")
+    @DisplayName("Successful transition to 'constructor' page from 'personal Account'")
+    @Description("A test that verifies that a user can register, login and go to 'constructor' page from 'personal account' using 'constructor' button.")
     public void testConstructorButtonTransition() {
 
         mainPage.clickConstructorButton();
@@ -58,13 +58,13 @@ public class ConstructorTest {
     }
 
     @Test
-    @DisplayName("Successful transition to Constructor page from Personal Account")
-    @Description("A test that verifies that a user can register, login and go to Constructor page from Personal account using LOGO.")
+    @DisplayName("Successful transition to 'constructor' page from 'personal account'")
+    @Description("A test that verifies that a user can register, login and go to 'constructor' page from 'personal account' using LOGO.")
     public void testConstructorLogoTransition() {
 
         mainPage.clickLogoButton();
 
-        assertTrue("The transfer to the Personal Account has not been completed", mainPage.isTitleDisplayed());
+        assertTrue("The transfer to the 'personal account' has not been completed", mainPage.isTitleDisplayed());
     }
 
     @After

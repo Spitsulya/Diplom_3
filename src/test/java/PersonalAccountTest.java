@@ -47,16 +47,16 @@ public class PersonalAccountTest {
     }
 
     @Test
-    @DisplayName("Successful transition to Personal Account")
-    @Description("A test that verifies that a user can register, login and go to Personal account.")
+    @DisplayName("Successful transition to 'personal account'")
+    @Description("A test that verifies that a user can register, login and go to 'personal account'.")
     public void testLoginAndGoToPersonalAccount() {
 
-        loginPage.openStellarBurgersURL();
+        loginPage.openStellarBurgersLoginURL();
         loginPage.inputAllRegisterFieldsAndGo(userEmail, userPassword);
 
         mainPage.clickAccountButton();
 
-        assertTrue("The transfer to the Personal Account has not been completed", personalAccount.isExitDisplayed());
+        assertTrue("The transfer to the 'personal account' has not been completed", personalAccount.isExitDisplayed());
     }
 
     @After

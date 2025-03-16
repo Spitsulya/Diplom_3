@@ -19,16 +19,12 @@ public class PersonalAccount {
         this.driver = driver;
     }
 
-    public static By getPAexitButtonLocator() {
-        return PA_EXIT_BUTTON;
-    }
-
-    @Step("Click on the exit button on the Personal account page")
+    @Step("Click on the exit button on the 'personal account' page")
     public void clickExitButton() {
         driver.findElement(PA_EXIT_BUTTON).click();
     }
 
-    @Step("Checking successfully transition to personal account")
+    @Step("Checking successfully transition to 'personal account'")
     public boolean isExitDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {

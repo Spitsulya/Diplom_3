@@ -1,25 +1,23 @@
 import com.github.javafaker.Faker;
 import client.BurgerServiceClient;
 import io.qameta.allure.Description;
-import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import model.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.junit.Test;
-import org.openqa.selenium.WebElement;
 import static org.junit.Assert.assertTrue;
 
-@RunWith(Parameterized.class)
+
 public class LoginTest {
 
     private WebDriver driver;
 
     private LoginPage loginPage;
+    private MainPage mainPage;
+    private ForgotPasswordPage forgotPasswordPage;
+    private RegisterPage registerPage;
 
     private BurgerServiceClient client;
     private String userAccessToken;
@@ -30,20 +28,6 @@ public class LoginTest {
 
     private Faker faker;
 
-    @Parameterized.Parameter(0)
-    public String pageUrl; // URL страницы
-    @Parameterized.Parameter(1)
-    public By buttonLocator; // Локатор кнопки
-
-    @Parameterized.Parameters(name = "{index}: testLogin(pageUrl={0}, buttonLocator={1})")
-    public static Object[][] loginButtonProvider() {
-        return new Object[][] {
-                {MainPage.getPageUrl(), MainPage.getMainAccountButtonLocator()}, // Вход через кнопку «Войти в аккаунт»
-                {MainPage.getPageUrl(), MainPage.getMainLoginButtonLocator()}, // Вход через кнопку «Личный кабинет»
-                {RegisterPage.getRegisterPageUrl(), RegisterPage.getRegisterLoginButtonLocator()}, // Вход через кнопку в форме регистрации
-                {ForgotPasswordPage.getForgotPasswordPageUrl(), ForgotPasswordPage.getFPLoginButtonLocator()} // Вход через кнопку в форме восстановления пароля
-        };
-    }
 
     @Before
     public void setUp() {
@@ -51,6 +35,9 @@ public class LoginTest {
         driver = WebDriverFactory.getDefaultDriver();
 
         loginPage = new LoginPage(driver);
+        mainPage = new MainPage(driver);
+        forgotPasswordPage = new ForgotPasswordPage(driver);
+        registerPage = new RegisterPage(driver);
 
         faker = new Faker();
         userEmail = faker.internet().emailAddress();
@@ -63,16 +50,58 @@ public class LoginTest {
     }
 
     @Test
-    @DisplayName("Successful login operation using four buttons")
-    @Description("A test that verifies that a user can register and login using four login buttons and three URL pages.")
-    public void testUserLoginUsingFourButtons() {
+    @DisplayName("Successful login operation using 'personal account' button ('main' page)")
+    @Description("A test that verifies that a user can register and login using 'Personal Account' button from main page.")
+    public void testUserLoginUsingMainAccountButton() {
 
-        openURL(pageUrl);
-        clickButton(buttonLocator);
+        mainPage.openStellarBurgersMainURL();
+        mainPage.clickAccountButton();
+
         loginPage.inputAllRegisterFieldsAndGo(userEmail, userPassword);
 
         assertTrue("The login was not successful.", loginPage.isTitleDisplayed());
     }
+
+    @Test
+    @DisplayName("Successful login operation using 'login' button ('main' page)")
+    @Description("A test that verifies that a user can register and login using 'Login' button from main page.")
+    public void testUserLoginUsingMainLoginButton() {
+
+        mainPage.openStellarBurgersMainURL();
+        mainPage.clickLoginButton();
+
+        loginPage.inputAllRegisterFieldsAndGo(userEmail, userPassword);
+
+        assertTrue("The login was not successful.", loginPage.isTitleDisplayed());
+    }
+
+    @Test
+    @DisplayName("Successful login operation using 'login' button ('register' page)")
+    @Description("A test that verifies that a user can register and login using 'Login' button from 'register' page.")
+    public void testUserLoginUsingRegisterLoginButton() {
+
+        registerPage.openStellarBurgersRegisterURL();
+        registerPage.clickLoginButton();
+
+        loginPage.inputAllRegisterFieldsAndGo(userEmail, userPassword);
+
+        assertTrue("The login was not successful.", loginPage.isTitleDisplayed());
+    }
+
+    @Test
+    @DisplayName("Successful login operation using 'login' button ('forgot-password' page)")
+    @Description("A test that verifies that a user can register and login using 'Login' button from 'forgot-password' page.")
+    public void testUserLoginUsingForgotLoginButton() {
+
+        forgotPasswordPage.openStellarBurgersForgotURL();
+        forgotPasswordPage.clickLoginButton();
+
+        loginPage.inputAllRegisterFieldsAndGo(userEmail, userPassword);
+
+        assertTrue("The login was not successful.", loginPage.isTitleDisplayed());
+    }
+
+
 
     @After
     public void tearDown() {
@@ -81,16 +110,5 @@ public class LoginTest {
         }
 
         driver.quit();
-    }
-
-    @Step("Open Stellar Burgers URL depending on the page.")
-    public  void openURL(String pageUrl) {
-        driver.get(pageUrl);
-    }
-
-    @Step("Clicking on the Login button depending on the button locator.")
-    public void clickButton(By buttonLocator) {
-        WebElement button = driver.findElement(buttonLocator);
-        button.click();
     }
 }

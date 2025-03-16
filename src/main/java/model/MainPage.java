@@ -46,7 +46,7 @@ public class MainPage {
 
 
     @Step("Open Stellar Burgers main URL")
-    public  void openStellarBurgersURL() {
+    public void openStellarBurgersMainURL() {
         driver.get(PAGE_URL);
     }
 
@@ -57,7 +57,7 @@ public class MainPage {
 
     @Step("Click on the Login button")
     public void clickLoginButton() {
-        driver.findElement(LOGO_BUTTON).click();
+        driver.findElement(MAIN_LOGIN_BUTTON).click();
     }
 
     @Step("Click on the Constructor on the main form")
@@ -68,23 +68,22 @@ public class MainPage {
 
     @Step("Click on the LOGO on the main form")
     public void clickLogoButton() {
-        driver.findElement(MAIN_CONSTRUCTOR_BUTTON).click();
+        driver.findElement(LOGO_BUTTON).click();
     }
 
     @Step("Click on the BUN on the Constructor form")
     public void clickBunTab() {
         driver.findElement(CONSTRUCTOR_BUN_INACTIVE_TAB).click();
-//        waitForElementToBeVisible(CONSTRUCTOR_BUN_ACTIVE_TAB);
     }
+
     @Step("Click on the SOUSE on the Constructor form")
     public void clickSouseTab() {
         driver.findElement(CONSTRUCTOR_SOUSE_INACTIVE_TAB).click();
-//        waitForElementToBeVisible(CONSTRUCTOR_SOUSE_ACTIVE_TAB);
     }
+
     @Step("Click on the FILLING on the Constructor form")
     public void clickFillingTab() {
         driver.findElement(CONSTRUCTOR_FILLING_INACTIVE_TAB).click();
-//        waitForElementToBeVisible(CONSTRUCTOR_FILLING_ACTIVE_TAB);
     }
 
     public void waitForElementToBeVisible(By locator) {
@@ -101,18 +100,6 @@ public class MainPage {
         } catch (Exception e) {
             return false; // Если заголовок не появился, возвращаем false
         }
-    }
-
-    public static String getPageUrl() {
-        return PAGE_URL;
-    }
-
-    public static By getMainAccountButtonLocator() {
-        return MAIN_ACCOUNT_BUTTON;
-    }
-
-    public static By getMainLoginButtonLocator() {
-        return MAIN_LOGIN_BUTTON;
     }
 
     public static By getMainTittleCreateBurgerLocator() {
@@ -133,8 +120,5 @@ public class MainPage {
     public boolean isFillingTabActive() {
         return driver.findElements(CONSTRUCTOR_FILLING_ACTIVE_TAB).size() > 0;
     }
-
-
-
 
 }

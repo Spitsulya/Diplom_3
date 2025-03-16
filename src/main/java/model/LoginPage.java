@@ -22,10 +22,6 @@ public class LoginPage {
     private static final By LOGIN_LOGIN_BUTTON = By.xpath(".//button[text()='Войти']");
     // Кнопка Зарегистрироваться
     private static final By LOGIN_REGISTER_BUTTON = By.xpath(".//*[text()='Зарегистрироваться']");
-    // Кнопка Восстановить пароль
-    private static final By LOGIN_RECOVER_PASSWORD_BUTTON = By.xpath(".//*[text()='Восстановить пароль']");
-    // Заголовок Соберите бургер
-    private static final By LOGIN_TITTLE_CREATE_BURGER = By.xpath(".//*[text()='Соберите бургер']");
     // Заголовок Вход
     private static final By LOGIN_TITTLE = By.xpath(".//div[@class='AppHeader_header__logo__2D0X2']");
 
@@ -33,11 +29,12 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    @Step("Open Stellar Burgers login URL")
-    public  void openStellarBurgersURL() {
+    @Step("Open Stellar Burgers 'login' page URL")
+    public  void openStellarBurgersLoginURL() {
         driver.get(LOGIN_PAGE_URL);
     }
 
+    @Step("Click on the 'login' button on the 'register' page form")
     public void clickRegisterButton() {
         driver.findElement(LOGIN_REGISTER_BUTTON).click();
     }
@@ -62,7 +59,7 @@ public class LoginPage {
         clickLoginButton();
     }
 
-    @Step("Checking successfull user login")
+    @Step("Checking successful user login")
     public boolean isTitleDisplayed() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         try {

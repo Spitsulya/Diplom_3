@@ -37,7 +37,7 @@ public class RegistrationTest {
         driver = WebDriverFactory.getDefaultDriver();
 
         mainPage = new MainPage(driver);
-        mainPage.openStellarBurgersURL();
+        mainPage.openStellarBurgersMainURL();
 
         faker = new Faker();
         userEmail = faker.internet().emailAddress();

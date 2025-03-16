@@ -43,15 +43,15 @@ public class ExitTest {
         client = new BurgerServiceClient();
         userAccessToken = client.createUserPostRequest(userEmail, userPassword, userName).extract().path("accessToken");
 
-        loginPage.openStellarBurgersURL();
+        loginPage.openStellarBurgersLoginURL();
         loginPage.inputAllRegisterFieldsAndGo(userEmail, userPassword);
         mainPage.clickAccountButton();
 
     }
 
     @Test
-    @DisplayName("Successful logout from Personal Account")
-    @Description("A test that verifies that a user can register, login, go to Personal account and logout using Exit button.")
+    @DisplayName("Successful logout from 'personal account'")
+    @Description("A test that verifies that a user can register, login, go to 'personal account' and logout using 'exit' button.")
     public void testLogoutProcess() {
 
         personalAccount.clickExitButton();

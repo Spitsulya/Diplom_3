@@ -16,15 +16,14 @@ public class ForgotPasswordPage {
         this.driver = driver;
     }
 
-    @Step("Getting 'forgot-password' page URL")
-    public static String getForgotPasswordPageUrl() {
-        return FORGOT_PASSWORD_PAGE_URL;
+    @Step("Open Stellar Burgers 'forgot-password' page URL")
+    public void openStellarBurgersForgotURL() {
+        driver.get(FORGOT_PASSWORD_PAGE_URL);
     }
 
-    @Step("Getting login button locator on the 'forgot-password' page")
-    public static By getFPLoginButtonLocator() {
-        return FP_LOGIN_BUTTON;
+    @Step("Click on the 'Login' button on the 'forgot-password' page")
+    public void clickLoginButton() {
+        driver.findElement(FP_LOGIN_BUTTON).click();
     }
-
 
 }
